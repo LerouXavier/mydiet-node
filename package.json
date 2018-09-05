@@ -17,8 +17,8 @@
     "security",
     "web"
   ],
-  "author": "Randall Degges",
-  "license": "Unlicense",
+  "author": "Dominik Kalinowski",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/rdegges/ss-auth/issues"
   },

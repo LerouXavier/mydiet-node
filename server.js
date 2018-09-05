@@ -16,7 +16,7 @@ const settings = require("./settings");
 let app = express();
 
 // init
-mongoose.connect("mongodb://localhost/ss-auth");
+mongoose.connect("mongodb://localhost/nutritional_plan");
 
 // settings
 app.set("view engine", "pug");
@@ -48,4 +48,4 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke :( Please try again.");
 });
 
-app.listen(3000);
+app.listen(3030);
