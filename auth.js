@@ -12,9 +12,6 @@ const settings = require("./settings");
  */
 module.exports.loginRequired = (req, res, next) => {
   if (req.user) {
-    if (req.) {
-
-    }
     return next();
   }
 

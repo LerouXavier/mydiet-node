@@ -46,22 +46,22 @@ router.post("/register", (req, res) => {
 /**
  * Render the login page.
  */
-router.get("/login", (req, res) => {
-  res.render("login", { csrfToken: req.csrfToken() });
-});
+// router.get("/login", (req, res) => {
+//   res.render("login", { csrfToken: req.csrfToken() });
+// });
 
 /**
  * Log a user into their account.
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
-router.post("/login", (req, res) => {
+router.post("/v1/login", (req, res) => {
   models.User.findOne({ email: req.body.email }, "firstName lastName email password", (err, user) => {
     if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
-      return res.render("login", {
-        error: "Incorrect email / password.",
-        csrfToken: req.csrfToken()
-      });
+      return res.status(401).send({
+          error: "Incorrect email / password.",
+          csrfToken: req.csrfToken()
+      })
     }
 
     auth.createUserSession(req, res, user);
@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
 /**
  * Log a user out of their account, then redirect them to the home page.
  */
-router.get("/logout", (req, res) => {
+router.get("/v1/logout", (req, res) => {
   if (req.session) {
     req.session.reset();
   }
