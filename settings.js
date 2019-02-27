@@ -35,5 +35,20 @@ module.exports = {
   //
   // const secureRandom = require("secure-random");
   // console.log(secureRandom(512, { type: "Buffer" }).toString("base64"));
-  JWT_SIGNING_KEY: process.env.JWT_SIGNING_KEY
+  JWT_SIGNING_KEY: process.env.JWT_SIGNING_KEY,
+
+  MAIL_HOST: "smtp.gmail.com",
+
+  MAIL_PORT: 465,
+
+  MAIL_PROTOCOL: "smtps",
+
+  MAIL_USER: "3v4w8tibx5y@gmail.com",
+
+  MAIL_PASSWORD: "}4hI*mscBUpKk5iak;_uIZse,",
+
+  MAIL_AUTH: false,
+
+  MAIL_STARTTLS: false
+
 };

@@ -4,6 +4,7 @@
     <option name="serverConfigurations">
       <list>
         <ServerConfiguration>
+          <option name="label" value="main" />
           <option name="serverUrls">
             <list>
               <option value="localhost:27017" />
@@ -13,6 +14,121 @@
             <SshTunnelingConfiguration />
           </option>
           <option name="userDatabase" value="nutritional_plan" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="session" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="nutritional_plan_session" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="session" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="nutritional_plan_session" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="nutritional_plan_session" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="connect_mongodb_session_test" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="connect_mongodb_session_test" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="connect_mongodb_session_test" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="connect_mongodb_session_test" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
         </ServerConfiguration>
       </list>
     </option>

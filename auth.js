@@ -1,7 +1,6 @@
 const nJwt = require("njwt");
 
-const auth = require('./auth');
-const models = require('./models');
+const {User} = require('./user/user.model');
 const settings = require("./settings");
 
 /**
@@ -11,11 +10,11 @@ const settings = require("./settings");
  * it will redirect the visitor to the login page.
  */
 module.exports.loginRequired = (req, res, next) => {
-  if (req.user) {
-    return next();
-  }
-
-  res.redirect("/login");
+    if (req.user) {
+        next();
+    } else {
+        res.status(401).send('Authrization failed! Please login');
+    }
 };
 
 /**
@@ -34,12 +33,13 @@ module.exports.createUserSession = (req, res, user) => {
     // you can embed a comma-delimited list of scopes here that will be used for
     // authorization
     scope: "active",
-    sub: user._id
+    sub: user.id
   };
   let jwt = nJwt.create(claims, settings.JWT_SIGNING_KEY, settings.JWT_SIGNING_ALGORITHM);
 
   jwt.setExpiration(new Date().getTime() + settings.SESSION_DURATION);
   req.session.userToken = jwt.compact();
+  res.userToken = req.session.userToken;
 };
 
 /**
@@ -59,7 +59,7 @@ module.exports.loadUserFromSession = (req, res, next) => {
       return next();
     }
 
-    models.User.findById(verifiedJwt.body.sub, (err, user) => {
+    User.findById(verifiedJwt.body.sub, (err, user) => {
       if (err) {
         return next(err);
       }
@@ -81,4 +81,4 @@ module.exports.loadUserFromSession = (req, res, next) => {
       next();
     });
   });
-}
+};
