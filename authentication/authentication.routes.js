@@ -1,81 +1,110 @@
-const bcrypt  = require('bcryptjs');
 const express = require('express');
-const shortid = require('shortid');
-const nodemailer = require('nodemailer');
+const passport = require('passport');
+const validators = require('./authentication.validators');
 
-const auth = require('../auth');
-const {User}     = require('./user.model');
-const settings   = require('../settings');
-let router       = express.Router();
+const router = new express.Router();
 
 /**
- * Create a new user account.
- *
- * Once a user is logged in, they will be sent to the dashboard page.
- */
-router.post('/v1/register', (req, res) => {
-    let {firstName, lastName, email, password, language} = req.body; // this is called destructuring. We're extracting these variables and their values from 'req.body'
-
-    let userData = {
-        firstName,
-        lastName,
-        password: bcrypt.hashSync(password, settings.BCRYPT_WORK_FACTOR), // we are using bcrypt to hash our password before saving it to the database
-        email,
-        language
-    };
-
-    let user = new User(userData);
-
-    user.save((error) => {
-        if (!error) {
-            return res.status(201).json('Registered successfully');
-        } else {
-            if (error.code === 11000) { // this error gets thrown only if similar user record already exist.
-                return res.status(409).send('That email is already taken. Please try another.');
-            } else {
-                console.log(JSON.stringify(error, null, 2)); // you might want to do this to examine and trace where the problem is emanating from
-                return res.status(500).send({
-                    error: 'Error: Could not create new account.'
-                });
-            }
-        }
-
-        // auth.createUserSession(req, res, user);
-    });
-});
-
-/**
+ 1. Register
+ =================
  * Log a user into their account.
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
-router.post('/v1/login', (req, res) => {
-    let {email, password} = req.body;
+router.post('/v1/register', (req, res, next) => {
+    const validationResult = validators.validateSignupForm(req.body);
+    if (!validationResult.success) {
+        return res.status(400).json({
+            success: false,
+            message: validationResult.message,
+            errors: validationResult.errors
+        });
+    }
 
-    User.findOne({email: email}, 'firstName lastName email password', (err, user) => {
-        if (!user || !bcrypt.compareSync(password, user.password)) {
-            return res.status(401).send({
-                error: 'Incorrect email / password.'
+    return passport.authenticate('local-signup', (err) => {
+        if (err) {
+            if (err.name === 'MongoError' && err.code === 11000) {
+                // the 11000 Mongo code is for a duplication email error
+                // the 409 HTTP status code is for conflict error
+                return res.status(409).json({
+                    success: false,
+                    message: 'Check the form for errors.',
+                    errors: {
+                        email: 'This email is already taken.'
+                    }
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                message: 'Could not process the form.'
             });
         }
 
-        auth.createUserSession(req, res, user);
-
-        return res.status(200).send();
-    });
-
+        return res.status(200).json({
+            success: true,
+            message: 'You have successfully signed up! Now you should be able to log in.'
+        });
+    })(req, res, next);
 });
 
 /**
+ 2. Login
+ =================
+ * Log a user into their account.
+ *
+ * Once a user is logged in, they will be sent to the dashboard page.
+ */
+router.post('/v1/login', (req, res, next) => {
+    const validationResult = validators.validateLoginForm(req.body);
+    if (!validationResult.success) {
+        return res.status(400).json({
+            success: false,
+            message: validationResult.message,
+            errors: validationResult.errors
+        });
+    }
+
+
+    return passport.authenticate('local-login', (err, token, userData) => {
+        if (err) {
+            if (err.name === 'IncorrectCredentialsError') {
+                return res.status(400).json({
+                    success: false,
+                    message: err.message
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                message: 'Could not process the form.'
+            });
+        }
+
+        res.cookie('token', token);
+
+        return res.json({
+            success: true,
+            message: 'You have successfully logged in!',
+            user: userData
+        });
+    })(req, res, next);
+});
+
+/**
+ 3. Logout
+ =================
  * Log a user out of their account, then redirect them to the home page.
  */
 router.get('/v1/logout', (req, res) => {
-    if (req.session) {
-        delete req.session.user; // any of these works
-        req.session.destroy(); // any of these works
-        res.status(200).send('logout successful')
-    }
-    res.status(401).send('You are already logged out.')
+    req.logout();
+
+    res.cookie('token', '');
+
+    return res.json({
+        success: true,
+        message: 'You have successfully logged out!'
+    });
 });
 
 /*
@@ -158,6 +187,5 @@ router.post('/v1/resetpass', (req, res) => {
         }
     });
 });
-
 
 module.exports = router;
