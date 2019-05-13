@@ -1,4 +1,6 @@
 module.exports = {
+  DB_URL: "mongodb://localhost/nutritional_plan",
+
   // the 'strength' of our bcrypt hashing algorithm
   // 14 is a good strength at the present time based on the strength of
   // commodity computers
