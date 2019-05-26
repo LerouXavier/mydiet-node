@@ -11,7 +11,7 @@ const router = new express.Router();
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
-router.post('/v1/register', (req, res, next) => {
+router.post('/register', (req, res, next) => {
     const validationResult = validators.validateSignupForm(req.body);
     if (!validationResult.success) {
         return res.status(400).json({
@@ -55,7 +55,7 @@ router.post('/v1/register', (req, res, next) => {
  *
  * Once a user is logged in, they will be sent to the dashboard page.
  */
-router.post('/v1/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
     const validationResult = validators.validateLoginForm(req.body);
     if (!validationResult.success) {
         return res.status(400).json({
@@ -96,7 +96,7 @@ router.post('/v1/login', (req, res, next) => {
  =================
  * Log a user out of their account, then redirect them to the home page.
  */
-router.get('/v1/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     req.logout();
 
     res.cookie('token', '');
@@ -112,7 +112,7 @@ router.get('/v1/logout', (req, res) => {
 =================
 We shall be using two endpoints to implement password reset functionality
 */
-router.post('/v1/forgot', (req, res) => {
+router.post('/forgot', (req, res) => {
     let {email} = req.body; // same as let email = req.body.email
     User.findOne({email: email}, (err, userData) => {
         if (!err) {
@@ -162,7 +162,7 @@ router.post('/v1/forgot', (req, res) => {
     });
 });
 
-router.post('/v1/resetpass', (req, res) => {
+router.post('/resetpass', (req, res) => {
     let {resetKey, newPassword} = req.body;
     User.find({passResetKey: resetKey}, (err, userData) => {
         if (!err) {
