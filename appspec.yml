@@ -7,8 +7,8 @@ files:
 permissions:
 - object: /usr/my-diet-node/scripts/codedeploy
   pattern: "*.sh"
-  owner: root
-  group: root
+  owner: ec2-user
+  group: adm
   mode: 755
   type:
   - file

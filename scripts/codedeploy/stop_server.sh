@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo pm2 stop node-app
+sudo pm2 stop my-diet-node
 
 # isExistApp=`sudo pgrep pm2`
 # if [[ -n  $isExistApp ]]; then

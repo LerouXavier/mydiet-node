@@ -11,3 +11,4 @@ yum install -y nodejs
 
 # install pm2 to restart node app
 npm i -g pm2@3.5.0
+
