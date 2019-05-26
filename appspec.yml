@@ -5,7 +5,7 @@ files:
   destination: /usr/my-diet-node
   overwrite: true
 permissions:
-- object: /usr/my-diet-node/config/codedeploy
+- object: /usr/my-diet-node/scripts/codedeploy
   pattern: "*.sh"
   owner: root
   group: root
@@ -14,14 +14,14 @@ permissions:
   - file
 hooks:
   BeforeInstall:
-  - location: config/codedeploy/install_dependencies.sh
+  - location: scripts/codedeploy/install_dependencies.sh
     timeout: 180
   ApplicationStart:
-  - location: config/codedeploy/start_server.sh
+  - location: scripts/codedeploy/start_server.sh
     timeout: 180
   ApplicationStop:
-  - location: config/codedeploy/stop_server.sh
+  - location: scripts/codedeploy/stop_server.sh
     timeout: 180
   ValidateService:
-  - location: config/codedeploy/validate_service.sh
+  - location: scripts/codedeploy/validate_service.sh
     timeout: 180
