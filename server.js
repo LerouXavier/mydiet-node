@@ -41,23 +41,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // app.use(csurf());
 
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     headers: "Origin, X-Requested-With, Content-Type, Accept",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//     optionsSuccessStatus: 204,
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'http://localhost:3000',
+    headers: "Origin, X-Requested-With, Content-Type, Accept",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    optionsSuccessStatus: 204,
+    credentials: true
+}));
 
 // pass the authorization checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api', authCheckMiddleware);
-
+app.use('/api/v1/proportions', authCheckMiddleware);
 
 // routes
-app.use(authenticationRoutes);
 // app.use(dashboardRoutes);
-app.use('/api', proportionsRoutes);
+app.use('/api/v1', [authenticationRoutes, proportionsRoutes]);
 // app.use(templateRoutes);
 
 // error handling

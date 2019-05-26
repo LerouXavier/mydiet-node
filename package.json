@@ -1,7 +1,7 @@
 {
-  "name": "ss-auth",
+  "name": "my-diet",
   "version": "0.0.1",
-  "description": "Stupid Simple Authentication",
+  "description": "The MyDiet backend",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rdegges/ss-auth.git"
+    "url": "https://github.com/LerouXavier/mydiet-node.git"
   },
   "keywords": [
     "authentication",
@@ -21,9 +21,9 @@
   "author": "Dominik Kalinowski",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/rdegges/ss-auth/issues"
+    "url": "https://github.com/LerouXavier/mydiet-node/issues"
   },
-  "homepage": "https://github.com/rdegges/ss-auth#readme",
+  "homepage": "https://github.com/LerouXavier/mydiet-node",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
