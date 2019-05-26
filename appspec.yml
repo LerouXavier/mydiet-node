@@ -5,6 +5,12 @@ files:
   destination: /usr/my-diet-node
   overwrite: true
 permissions:
+- object: /usr/my-diet-node
+  owner: ec2-user
+  group: adm
+  mode: 766
+  type:
+  - directory
 - object: /usr/my-diet-node/scripts/codedeploy
   pattern: "*.sh"
   owner: ec2-user
