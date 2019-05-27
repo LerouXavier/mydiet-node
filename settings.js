@@ -18,7 +18,7 @@ module.exports = {
 
   // our unique secret key -- this keeps sessions secure -- it should never be
   // checked into version control, but it should be the same among all servers
-  SESSION_SECRET_KEY: $SESSION_SECRET_KEY,
+  SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY,
 
   // only set cookies over https. set this to true if you are running in
   // production, false otherwise
@@ -37,7 +37,7 @@ module.exports = {
   //
   // const secureRandom = require("secure-random");
   // console.log(secureRandom(512, { type: "Buffer" }).toString("base64"));
-  JWT_SIGNING_KEY: $JWT_SIGNING_KEY,
+  JWT_SIGNING_KEY: process.env.JWT_SIGNING_KEY,
 
   MAIL_HOST: "smtp.gmail.com",
 
@@ -47,7 +47,7 @@ module.exports = {
 
   MAIL_USER: "3v4w8tibx5y@gmail.com",
 
-  MAIL_PASSWORD: $MAIL_PASSWORD,
+  MAIL_PASSWORD: process.env.MAIL_PASSWORD,
 
   MAIL_AUTH: false,
 
