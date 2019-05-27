@@ -1,6 +1,6 @@
 #!/bin/bash
 isExistApp=`pm2 pid my-diet-node`
-if [[ -n  $isExistApp ]]; then
+if [[ ! -z  $isExistApp ]]; then
  pm2 stop my-diet-node
 fi
 
