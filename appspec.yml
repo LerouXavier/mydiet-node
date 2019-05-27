@@ -5,16 +5,10 @@ files:
   destination: /usr/my-diet-node
   overwrite: true
 permissions:
-- object: /usr/my-diet-node
-  owner: ec2-user
-  group: adm
-  mode: 766
-  type:
-  - directory
 - object: /usr/my-diet-node/scripts/codedeploy
   pattern: "*.sh"
-  owner: ec2-user
-  group: adm
+  owner: root
+  group: root
   mode: 755
   type:
   - file
@@ -25,12 +19,9 @@ hooks:
   ApplicationStart:
   - location: scripts/codedeploy/start_server.sh
     timeout: 180
-    runas: ec2-user
   ApplicationStop:
   - location: scripts/codedeploy/stop_server.sh
     timeout: 180
-    runas: ec2-user
   ValidateService:
   - location: scripts/codedeploy/validate_service.sh
     timeout: 180
-    runas: ec2-user
