@@ -1,12 +1,8 @@
 #!/bin/bash
-sudo pm2 stop my-diet-node
-
-# isExistApp=`sudo pgrep pm2`
-# if [[ -n  $isExistApp ]]; then
-    # sudo pm2 kill
-    # sudo pm2 stop node-app
-    # you can remove the crontab as well
-# fi
+isExistApp=`pm2 pid my-diet-node`
+if [[ -n  $isExistApp ]]; then
+ pm2 stop my-diet-node
+fi
 
 # isExistApp=`pgrep pm2`
 # if [[ -n  $isExistApp ]]; then
