@@ -13,5 +13,4 @@ yum install -y nodejs
 npm i -g pm2@3.5.0
 
 # install NPM dependencies
-cd /usr/my-diet-node
-npm install
+chown -hR ec2-user:adm /usr/my-diet-node/
