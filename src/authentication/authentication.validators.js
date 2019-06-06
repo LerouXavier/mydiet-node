@@ -67,7 +67,7 @@ module.exports.validateLoginForm = function (payload) {
 
     if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
         isFormValid = false;
-        errors.password = 'Please provide your password.';
+        errors.password = 'Please provide your asd password.';
     }
 
     if (!isFormValid) {
