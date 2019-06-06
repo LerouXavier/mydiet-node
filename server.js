@@ -6,20 +6,17 @@ const passport = require('passport');
 const cors = require("cors");
 const PORT = 3030; // you can change this if this port number is not available
 
-const authenticationRoutes = require("./authentication/authentication.routes");
-const dashboardRoutes = require("./dashboard/dashboard.routes");
-const proportionsRoutes = require("./proportion/proportion.routes");
-const templateRoutes = require("./template/template.routes");
+const authenticationRoutes = require("./src/authentication/authentication.routes");
 // load models
-require('./user/user.model');
+require('./src/user/user.model');
 
 let app = express();
 app.use(helmet());
 app.use(passport.initialize());
 
 // load passport strategies
-const localLoginStrategy = require('./authentication/login.strategy');
-const localSignupStrategy = require('./authentication/register.strategy');
+const localLoginStrategy = require('./src/authentication/login.strategy');
+const localSignupStrategy = require('./src/authentication/register.strategy');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
@@ -41,22 +38,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // app.use(csurf());
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-    headers: "Origin, X-Requested-With, Content-Type, Accept",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    optionsSuccessStatus: 204,
-    credentials: true
-}));
-
-// pass the authorization checker middleware
-const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api/v1/proportions', authCheckMiddleware);
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     headers: "Origin, X-Requested-With, Content-Type, Accept",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//     optionsSuccessStatus: 204,
+//     credentials: true
+// }));
 
 // routes
-// app.use(dashboardRoutes);
-app.use('/api/v1', [authenticationRoutes, proportionsRoutes]);
-// app.use(templateRoutes);
+app.use('/api/v1', authenticationRoutes);
+
+// status
+app.route('/api/v1/status').get(function (req, res) {
+    res.sendStatus(200);
+});
 
 // error handling
 app.use((err, req, res, next) => {

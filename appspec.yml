@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 files:
 - source: /
-  destination: /usr/my-diet-node
+  destination: /usr/mydiet-user-node
   overwrite: true
 permissions:
-- object: /usr/my-diet-node/scripts/codedeploy
+- object: /usr/mydiet-user-node/scripts/codedeploy
   pattern: "*.sh"
   owner: root
   group: root
@@ -19,9 +19,12 @@ hooks:
   ApplicationStart:
   - location: scripts/codedeploy/start_server.sh
     timeout: 180
+    runas: ec2-user
   ApplicationStop:
   - location: scripts/codedeploy/stop_server.sh
     timeout: 180
+    runas: ec2-user
   ValidateService:
   - location: scripts/codedeploy/validate_service.sh
     timeout: 180
+    runas: ec2-user

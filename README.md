@@ -1,24 +1,17 @@
-# ss-auth
+# mydiet-user-node
 
-*Stupid-Simple Authentication*
+*This microservice for MyDiet*
 
-This project contains code which shows how to implement your own user
-authentication in a Node.js web app with MongoDB.
-
-This project is meant to go along with the talk I gave at Twilio Signal 2017.
-The talk walks you through how authentication works, from the ground up.
-
-I'll update this README with a link to the finished talk recording and slides
-once they are live.
+The project provides REST API to access both user data and provide the authentication mechanism for MyDiet.fitness.
 
 
 ## Installation
 
-Installing this project is simple, run the following commands:
+Run the following commands to setup the project:
 
 ```console
-$ git clone https://github.com/rdegges/ss-auth.git
-$ cd ss-auth
+$ git clone https://github.com/LerouXavier/mydiet-node.git
+$ cd mydiet-node
 $ npm install
 ```
 
@@ -57,21 +50,3 @@ this project.  It will work with all the default MongoDB options.
 
 **TIP**: Read through the settings specified in `settings.js`.  There are
 several options you will want to enable when running a production website.
-
-
-## Purpose
-
-This project shows how to implement basic user authentication in a Node web app.
-The accompanying talk explains how HTTP authentication works in a ground up way,
-explaining how each little piece works behind the scenes.
-
-If you've ever wanted to know how authentication works, see the accompanying
-talk.
-
-
-## Questions
-
-Got questions?  Hit me up!  I'm [r@rdegges.com](mailto:r@rdegges.com).
-
-
-  [secure-random]: https://www.npmjs.com/package/secure-random "Secure Random on NPM"

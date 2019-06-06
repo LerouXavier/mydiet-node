@@ -33,10 +33,7 @@ module.exports = {
 
   // the 256-byte JWT signing key that we'll use to sign all user tokens.  this
   // should never be checked into version control, but should be the same among
-  // all servers.  you can generate this using the secure-random library:
-  //
-  // const secureRandom = require("secure-random");
-  // console.log(secureRandom(512, { type: "Buffer" }).toString("base64"));
+  // all servers.
   JWT_SIGNING_KEY: process.env.JWT_SIGNING_KEY,
 
   MAIL_HOST: "smtp.gmail.com",
@@ -45,7 +42,7 @@ module.exports = {
 
   MAIL_PROTOCOL: "smtps",
 
-  MAIL_USER: "3v4w8tibx5y@gmail.com",
+  MAIL_USER: process.env.MAIL_ADDRESS,
 
   MAIL_PASSWORD: process.env.MAIL_PASSWORD,
 

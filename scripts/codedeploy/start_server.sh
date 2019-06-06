@@ -1,16 +1,17 @@
 #!/bin/bash
 
+pm2 update
 
 # install NPM dependencies
-cd /usr/my-diet-node/
+cd /usr/mydiet-user-node/
 npm install
 
-chown -hR ec2-user:adm /usr/my-diet-node/
+sudo chown -hR ec2-user:adm /usr/mydiet-user-node/
 
-# sudo chmod 755 /usr/my-diet-node/server.js # optional
+# sudo chmod 755 /usr/mydiet-user-node/server.js # optional
 # this will restart app/server on instance reboot
-crontab -l | { cat; echo "@reboot pm2 start /usr/my-diet-node/server.js -i 0 --name \"my-diet-node\""; } | crontab -
-pm2 stop my-diet-node
+crontab -l | { cat; echo "@reboot pm2 start /usr/mydiet-user-node/server.js --name \"mydiet-user-node\""; } | crontab -
+pm2 stop mydiet-user-node
 
 # actually start the server
-pm2 start /usr/my-diet-node/server.js -i 0 --name "my-diet-node"
+pm2 start /usr/mydiet-user-node/server.js --name "mydiet-user-node"
